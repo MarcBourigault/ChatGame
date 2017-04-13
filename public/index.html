@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>CHAT GAME GANG</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <h1> 🔫💊🍒Hoy Boy🍒💊🔫 </h1>
+
+    <h2>!!💬CHAT GAMES💬!!</h2>
+    <div class="log">
+    <img src="enjin.jpg">
+  </div>
+
+  <div id="users">
+    <h2>Connectés</h2>
+    <ul></ul>
+  </div>
+
+    <form action="/" method="POST" id="msgform">
+
+        <input type="textarea" name="message" id="message" placeholder="Votre message..." size="45" />
+        <input type="submit" id="envoi_message" value="Envoyer" />
+    </form>
+
+
+    <ul id="messages"></ul>
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+        var socket = io();
+        socket.on('connect', function() {
+            console.log('Connecté !');
+        });
+        socket.on('msg', function(txt) {
+            var messages = document.getElementById('messages');
+            var li = document.createElement('li');
+            li.innerText = txt;
+            messages.appendChild(li);
+
+        });
+
+              var usersUl = document.querySelector('#users ul');
+      socket.on('users', function(users) {
+        usersUl.innerHTML = users.map(u => '<li>' + u.nickname + '</li>').join('');
+      });
+
+        // ENVOI  D'UN NOUVEAU MSG
+        var msgform = document.getElementById("msgform");
+        msgform.addEventListener("submit", function(e) {
+            e.preventDefault();
+            socket.emit('msg', this.message.value);
+        });
+
+        msgform.message.focus();
+    </script>
+
+</body>
+
+</html>

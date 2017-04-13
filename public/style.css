@@ -1,0 +1,36 @@
+body{
+  background: navy;
+}
+form{
+  text-align: center;
+}
+
+h1, h2{
+  color:yellow;
+  text-align: center;
+}
+
+#message{
+  border-radius: 5px;
+}
+
+#envoi_message{
+  border-radius: 5px;
+}
+.log{
+
+  text-align: center;
+
+}
+img{
+  height: 25%;
+  width: 25%;
+}
+
+li{
+
+  text-align: center;
+  color: yellow;
+  list-style-type: none;
+
+}
